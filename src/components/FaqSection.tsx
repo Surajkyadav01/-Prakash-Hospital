@@ -72,7 +72,7 @@ interface FaqSectionProps {
 }
 
 export const FaqSection: React.FC<FaqSectionProps> = ({ onOpenBooking }) => {
-  const [openId, setOpenId] = useState<string>('faq-1');
+  const [openId, setOpenId] = useState<string>('');
   const [activeTab, setActiveTab] = useState<string>('all');
 
   const categories = [

@@ -97,7 +97,6 @@ export const Navbar: React.FC<NavbarProps> = ({
               alt="Prakash Hospital Logo"
               width={56}
               height={56}
-              loading="eager"
               className="w-12 h-12 sm:w-14 sm:h-14 rounded-full object-cover shadow-md shadow-slate-950/40 group-hover:scale-105 transition-all shrink-0"
               onError={(e) => {
                 e.currentTarget.src = getAssetUrl('/assets/prakash-hospital-logo.png');
@@ -214,7 +213,6 @@ export const Navbar: React.FC<NavbarProps> = ({
                 alt="Prakash Hospital Logo"
                 width={44}
                 height={44}
-                loading="eager"
                 className="w-10 h-10 rounded-full object-cover shadow-xs shrink-0"
                 onError={(e) => {
                   e.currentTarget.src = getAssetUrl('/assets/prakash-hospital-logo.png');
