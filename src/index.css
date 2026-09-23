@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+}
+
+html, body {
+  color-scheme: light;
+  background-color: #ffffff;
+}
+
+select, option, input, textarea {
+  color-scheme: light;
+  background-color: #ffffff;
+  color: #0f172a;
+}

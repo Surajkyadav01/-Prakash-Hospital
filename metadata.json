@@ -1,0 +1,6 @@
+{
+  "name": "Prakash Hospital & Multi-Speciality Care",
+  "description": "Prakash Hospital & Multi-Speciality Care in Suriyawan, Bhadohi (UP). 24x7 Emergency, ICU, OPD Doctor Booking, Surgery by Dr. O.P. Yadav, Ayushman Bharat & Cashless TPA. Helpline: +91 83838 26205.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
