@@ -40,7 +40,7 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({
       bio: 'Hospital Owner and Senior Surgeon leading gastro, proctology, and advanced surgical care at Prakash Hospital since its establishment in 2020, dedicated to bringing ethical, accessible healthcare to Suriyawan, Bhadohi.',
       initials: 'OP',
       badge: 'Hospital Owner & Chief Surgeon',
-      photoUrl: getAssetUrl('/assets/doctors/dr-op-yadav.jpg')
+      photoUrl: '/assets/doctors/dr-op-yadav.jpg'
     },
     {
       name: 'Kamlesh Yadav',
@@ -49,7 +49,7 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({
       bio: 'Hospital Manager overseeing daily operations, patient admissions, emergency coordination, and public inquiries. For any hospital issue, patient assistance, or operational inquiry, please contact Mr. Kamlesh Yadav directly.',
       initials: 'KY',
       badge: 'Hospital Manager',
-      photoUrl: getAssetUrl('/assets/team/kamlesh-yadav-manager.jpg'),
+      photoUrl: '/assets/team/kamlesh-yadav-manager.jpg',
       isManager: true,
       phone: HOSPITAL_INFO.emergencyNumber,
       phoneRaw: HOSPITAL_INFO.emergencyPhoneRaw,
@@ -252,24 +252,26 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({
                 <div className="space-y-4">
                   {/* Photo or Initials Avatar */}
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                    <div className="relative">
-                      {leader.photoUrl ? (
+                    <div className="relative w-28 h-36 sm:w-32 sm:h-40 rounded-2xl overflow-hidden border-2 border-sky-200 shadow-md bg-slate-900 shrink-0">
+                      {leader.photoUrl && (
                         <img
-                          src={leader.photoUrl}
+                          src={getAssetUrl(leader.photoUrl)}
                           alt={leader.name}
-                          loading="lazy"
-                          decoding="async"
-                          className="w-28 h-36 sm:w-32 sm:h-40 rounded-2xl object-cover object-[center_20%] border-2 border-sky-200 shadow-md"
+                          className="w-full h-full object-cover object-[center_20%] relative z-10"
                           onError={(e) => {
-                            (e.currentTarget as HTMLElement).style.display = 'none';
-                            const fallback = document.getElementById(`fallback-${leader.initials}`);
-                            if (fallback) fallback.style.display = 'flex';
+                            const img = e.currentTarget;
+                            const triedPng = img.getAttribute('data-tried-png');
+                            if (!triedPng && leader.photoUrl?.includes('dr-op-yadav')) {
+                              img.setAttribute('data-tried-png', 'true');
+                              img.src = getAssetUrl('/assets/doctors/dr-op-yadav.png');
+                            } else {
+                              img.style.display = 'none';
+                            }
                           }}
                         />
-                      ) : null}
+                      )}
                       <div 
-                        id={`fallback-${leader.initials}`}
-                        className={`w-28 h-36 sm:w-32 sm:h-40 rounded-2xl ${leader.isManager ? 'bg-gradient-to-br from-blue-900 to-sky-800' : 'bg-gradient-to-br from-slate-800 to-sky-900'} flex flex-col items-center justify-center text-white border-2 border-sky-100 shadow-xs ${leader.photoUrl ? 'hidden' : 'flex'}`}
+                        className={`absolute inset-0 ${leader.isManager ? 'bg-gradient-to-br from-blue-900 to-sky-800' : 'bg-gradient-to-br from-slate-800 to-sky-900'} flex flex-col items-center justify-center text-white`}
                       >
                         {leader.isManager ? (
                           <Briefcase className="w-8 h-8 text-sky-300 mb-2" />

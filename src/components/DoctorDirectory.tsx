@@ -214,31 +214,27 @@ export const DoctorDirectory: React.FC<DoctorDirectoryProps> = ({
                 <div className="p-5 sm:p-6 flex-1 flex flex-col">
                   <div className="flex gap-4 items-start">
                     
-                    {/* Doctor Avatar / Photo Placeholder */}
-                    <div className="relative shrink-0">
-                      {doc.photoUrl ? (
+                    {/* Doctor Avatar / Photo */}
+                    <div className="relative shrink-0 w-20 h-24 sm:w-24 sm:h-28 rounded-2xl overflow-hidden border-2 border-sky-200 shadow-xs bg-slate-900">
+                      {doc.photoUrl && (
                         <img
                           src={getAssetUrl(doc.photoUrl)}
                           alt={doc.name}
-                          loading="lazy"
-                          decoding="async"
-                          referrerPolicy="no-referrer"
-                          className="w-20 h-24 sm:w-24 sm:h-28 rounded-2xl object-cover object-[center_20%] border-2 border-sky-200 shadow-xs"
+                          className="w-full h-full object-cover object-[center_20%] relative z-10"
                           onError={(e) => {
-                            // If primary path fails, try png extension
-                            if (doc.photoUrl && !doc.photoUrl.endsWith('.png')) {
-                              e.currentTarget.src = getAssetUrl(doc.photoUrl.replace('.jpg', '.png'));
+                            const img = e.currentTarget;
+                            const triedPng = img.getAttribute('data-tried-png');
+                            if (!triedPng) {
+                              img.setAttribute('data-tried-png', 'true');
+                              img.src = getAssetUrl('/assets/doctors/dr-op-yadav.png');
                             } else {
-                              (e.currentTarget as HTMLElement).style.display = 'none';
-                              const fallback = document.getElementById(`doc-fallback-${doc.id}`);
-                              if (fallback) fallback.style.display = 'flex';
+                              img.style.display = 'none';
                             }
                           }}
                         />
-                      ) : null}
+                      )}
                       <div 
-                        id={`doc-fallback-${doc.id}`}
-                        className={`w-20 h-20 sm:w-22 sm:h-22 rounded-2xl bg-gradient-to-br from-slate-800 via-sky-900 to-slate-900 flex flex-col items-center justify-center text-white border-2 border-sky-200/60 shadow-xs relative overflow-hidden group ${doc.photoUrl ? 'hidden' : 'flex'}`}
+                        className="absolute inset-0 bg-gradient-to-br from-slate-800 via-sky-900 to-slate-900 flex flex-col items-center justify-center text-white"
                       >
                         <Stethoscope className="w-6 h-6 text-sky-300 mb-1 opacity-90" />
                         <span className="text-base sm:text-lg font-black tracking-wider text-sky-100">
@@ -251,7 +247,7 @@ export const DoctorDirectory: React.FC<DoctorDirectoryProps> = ({
                       
                       {/* Verified Doctor Badge */}
                       <div 
-                        className="absolute -bottom-2 -right-1 bg-white text-emerald-600 border border-emerald-200 shadow-2xs px-1.5 py-0.5 rounded-md flex items-center gap-1 text-[10px] font-bold"
+                        className="absolute -bottom-0.5 -right-0.5 z-20 bg-white text-emerald-600 border border-emerald-200 shadow-2xs px-1.5 py-0.5 rounded-tl-md rounded-br-xl flex items-center gap-1 text-[10px] font-bold"
                         title="Verified Medical Staff"
                       >
                         <ShieldCheck className="w-3 h-3 text-emerald-600" />

@@ -417,28 +417,30 @@ export const BookingPage: React.FC<BookingPageProps> = ({
                   {/* Doctor Summary Card */}
                   {currentDoctor && (
                     <div className="p-4 bg-sky-50/60 border border-sky-100 rounded-2xl flex items-center gap-3.5">
-                      {currentDoctor.photoUrl ? (
-                        <img
-                          src={getAssetUrl(currentDoctor.photoUrl)}
-                          alt={currentDoctor.name}
-                          className="w-14 h-16 rounded-xl object-cover object-[center_20%] border-2 border-white shadow-2xs shrink-0"
-                          onError={(e) => {
-                            if (currentDoctor.photoUrl && !currentDoctor.photoUrl.endsWith('.png')) {
-                              e.currentTarget.src = getAssetUrl(currentDoctor.photoUrl.replace('.jpg', '.png'));
-                            } else {
-                              (e.currentTarget as HTMLElement).style.display = 'none';
-                              const fallback = document.getElementById(`booking-doc-fallback-${currentDoctor.id}`);
-                              if (fallback) fallback.style.display = 'flex';
-                            }
-                          }}
-                        />
-                      ) : null}
-                      <div 
-                        id={`booking-doc-fallback-${currentDoctor.id}`}
-                        className={`w-14 h-14 rounded-xl bg-slate-900 text-sky-100 flex flex-col items-center justify-center font-bold text-xs shrink-0 border border-sky-200 ${currentDoctor.photoUrl ? 'hidden' : 'flex'}`}
-                      >
-                        <span className="text-sm font-black">{currentDoctor.avatarInitials || 'DR'}</span>
-                        <span className="text-[9px] text-sky-300 font-semibold">Doctor</span>
+                      <div className="relative w-14 h-16 rounded-xl overflow-hidden border-2 border-white shadow-2xs shrink-0 bg-slate-900">
+                        {currentDoctor.photoUrl && (
+                          <img
+                            src={getAssetUrl(currentDoctor.photoUrl)}
+                            alt={currentDoctor.name}
+                            className="w-full h-full object-cover object-[center_20%] relative z-10"
+                            onError={(e) => {
+                              const img = e.currentTarget;
+                              const triedPng = img.getAttribute('data-tried-png');
+                              if (!triedPng) {
+                                img.setAttribute('data-tried-png', 'true');
+                                img.src = getAssetUrl('/assets/doctors/dr-op-yadav.png');
+                              } else {
+                                img.style.display = 'none';
+                              }
+                            }}
+                          />
+                        )}
+                        <div 
+                          className="absolute inset-0 bg-slate-900 text-sky-100 flex flex-col items-center justify-center font-bold text-xs"
+                        >
+                          <span className="text-sm font-black">{currentDoctor.avatarInitials || 'DR'}</span>
+                          <span className="text-[9px] text-sky-300 font-semibold">Doctor</span>
+                        </div>
                       </div>
                       <div className="min-w-0 flex-1 text-xs">
                         <div className="flex items-center gap-1.5">
