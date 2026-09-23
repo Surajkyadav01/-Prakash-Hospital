@@ -17,6 +17,7 @@ import {
 import { HOSPITAL_INFO, DEPARTMENTS, SOCIAL_MEDIA_CHANNELS } from '../data/hospitalData';
 import { PageView } from '../types';
 import { PrivacyPolicyModal } from './PrivacyPolicyModal';
+import { getAssetUrl } from '../utils/assetPath';
 
 interface FooterProps {
   onNavigate: (view: PageView) => void;
@@ -136,13 +137,13 @@ export const Footer: React.FC<FooterProps> = ({
               className="flex items-center gap-3 cursor-pointer group select-none"
             >
               <img
-                src="/assets/prakash-hospital-logo.webp"
+                src={getAssetUrl('/assets/prakash-hospital-logo.webp')}
                 alt="Prakash Hospital Logo"
                 width={56}
                 height={56}
                 className="w-13 h-13 sm:w-14 sm:h-14 rounded-full object-cover shadow-md shadow-slate-950/50 group-hover:scale-105 transition-transform shrink-0"
                 onError={(e) => {
-                  e.currentTarget.src = "/assets/prakash-hospital-logo.png";
+                  e.currentTarget.src = getAssetUrl('/assets/prakash-hospital-logo.png');
                 }}
               />
               <div className="flex flex-col text-left">

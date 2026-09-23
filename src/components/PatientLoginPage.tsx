@@ -20,6 +20,7 @@ import {
   Activity
 } from 'lucide-react';
 import { HOSPITAL_INFO } from '../data/hospitalData';
+import { getAssetUrl } from '../utils/assetPath';
 
 interface PatientLoginPageProps {
   onBackToHome: () => void;
@@ -128,13 +129,13 @@ export const PatientLoginPage: React.FC<PatientLoginPageProps> = ({
             className="flex items-center gap-2 sm:gap-2.5 cursor-pointer select-none group"
           >
             <img
-              src="/assets/prakash-hospital-logo.webp"
+              src={getAssetUrl('/assets/prakash-hospital-logo.webp')}
               alt="Prakash Hospital Logo"
               width={48}
               height={48}
               className="w-11 h-11 sm:w-12 sm:h-12 rounded-full object-cover shadow-xs group-hover:scale-105 transition-transform shrink-0"
               onError={(e) => {
-                e.currentTarget.src = "/assets/prakash-hospital-logo.png";
+                e.currentTarget.src = getAssetUrl('/assets/prakash-hospital-logo.png');
               }}
             />
             <div className="flex flex-col text-left">

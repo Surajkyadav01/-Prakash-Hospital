@@ -23,6 +23,7 @@ import { DEPARTMENTS, DOCTORS, HOSPITAL_INFO } from '../data/hospitalData';
 import { Doctor, AppointmentConfirmation } from '../types';
 import { ADMIN_EMAIL, createAppointmentMailtoUrl, recordNotification } from '../utils/notificationService';
 import { CustomSelect } from './CustomSelect';
+import { getAssetUrl } from '../utils/assetPath';
 import { CustomDatePicker } from './CustomDatePicker';
 
 interface BookingPageProps {
@@ -196,13 +197,13 @@ export const BookingPage: React.FC<BookingPageProps> = ({
             className="flex items-center gap-2 sm:gap-2.5 cursor-pointer select-none group"
           >
             <img
-              src="/assets/prakash-hospital-logo.webp"
+              src={getAssetUrl('/assets/prakash-hospital-logo.webp')}
               alt="Prakash Hospital Logo"
               width={48}
               height={48}
               className="w-11 h-11 sm:w-12 sm:h-12 rounded-full object-cover shadow-xs group-hover:scale-105 transition-transform shrink-0"
               onError={(e) => {
-                e.currentTarget.src = "/assets/prakash-hospital-logo.png";
+                e.currentTarget.src = getAssetUrl('/assets/prakash-hospital-logo.png');
               }}
             />
             <div className="flex flex-col text-left">
@@ -418,13 +419,17 @@ export const BookingPage: React.FC<BookingPageProps> = ({
                     <div className="p-4 bg-sky-50/60 border border-sky-100 rounded-2xl flex items-center gap-3.5">
                       {currentDoctor.photoUrl ? (
                         <img
-                          src={currentDoctor.photoUrl}
+                          src={getAssetUrl(currentDoctor.photoUrl)}
                           alt={currentDoctor.name}
                           className="w-14 h-16 rounded-xl object-cover object-[center_20%] border-2 border-white shadow-2xs shrink-0"
                           onError={(e) => {
-                            (e.currentTarget as HTMLElement).style.display = 'none';
-                            const fallback = document.getElementById(`booking-doc-fallback-${currentDoctor.id}`);
-                            if (fallback) fallback.style.display = 'flex';
+                            if (currentDoctor.photoUrl && !currentDoctor.photoUrl.endsWith('.png')) {
+                              e.currentTarget.src = getAssetUrl(currentDoctor.photoUrl.replace('.jpg', '.png'));
+                            } else {
+                              (e.currentTarget as HTMLElement).style.display = 'none';
+                              const fallback = document.getElementById(`booking-doc-fallback-${currentDoctor.id}`);
+                              if (fallback) fallback.style.display = 'flex';
+                            }
                           }}
                         />
                       ) : null}

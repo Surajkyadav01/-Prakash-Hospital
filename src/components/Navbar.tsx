@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 import { HOSPITAL_INFO } from '../data/hospitalData';
 import { PageView } from '../types';
+import { getAssetUrl } from '../utils/assetPath';
 
 interface NavbarProps {
   currentView: PageView;
@@ -92,14 +93,14 @@ export const Navbar: React.FC<NavbarProps> = ({
             id="brand-logo-btn"
           >
             <img
-              src="/assets/prakash-hospital-logo.webp"
+              src={getAssetUrl('/assets/prakash-hospital-logo.webp')}
               alt="Prakash Hospital Logo"
               width={56}
               height={56}
               loading="eager"
               className="w-12 h-12 sm:w-14 sm:h-14 rounded-full object-cover shadow-md shadow-slate-950/40 group-hover:scale-105 transition-all shrink-0"
               onError={(e) => {
-                e.currentTarget.src = "/assets/prakash-hospital-logo.png";
+                e.currentTarget.src = getAssetUrl('/assets/prakash-hospital-logo.png');
               }}
             />
             <div className="flex flex-col text-left">
@@ -209,14 +210,14 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Hospital Brand in Center */}
             <div className="flex items-center gap-2">
               <img
-                src="/assets/prakash-hospital-logo.webp"
+                src={getAssetUrl('/assets/prakash-hospital-logo.webp')}
                 alt="Prakash Hospital Logo"
                 width={44}
                 height={44}
                 loading="eager"
                 className="w-10 h-10 rounded-full object-cover shadow-xs shrink-0"
                 onError={(e) => {
-                  e.currentTarget.src = "/assets/prakash-hospital-logo.png";
+                  e.currentTarget.src = getAssetUrl('/assets/prakash-hospital-logo.png');
                 }}
               />
               <div className="flex flex-col text-left">

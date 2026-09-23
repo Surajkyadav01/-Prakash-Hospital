@@ -1,4 +1,5 @@
 import { Doctor } from '../types';
+import { getAssetUrl } from '../utils/assetPath';
 
 export const REAL_DOCTORS: Doctor[] = [
   {
@@ -10,7 +11,7 @@ export const REAL_DOCTORS: Doctor[] = [
     hindiSpecialty: 'पेट एवं गुदा रोग विशेषज्ञ',
     departmentId: 'general-surgery',
     badge: 'Hospital Owner & Chief Surgeon',
-    photoUrl: '/assets/doctors/dr-op-yadav.jpg',
+    photoUrl: getAssetUrl('/assets/doctors/dr-op-yadav.jpg'),
     availability: 'प्रतिदिन (Daily)',
     avatarInitials: 'OP',
     availableDays: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],

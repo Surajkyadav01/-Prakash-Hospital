@@ -1,6 +1,7 @@
 import React from 'react';
 import { Award, ShieldCheck, Heart, Users, Bed, Activity, CheckCircle2 } from 'lucide-react';
 import { HOSPITAL_INFO } from '../data/hospitalData';
+import { getAssetUrl } from '../utils/assetPath';
 
 export const AboutSection: React.FC = () => {
   const stats = [
@@ -19,11 +20,14 @@ export const AboutSection: React.FC = () => {
           <div className="lg:col-span-5 relative">
             <div className="relative rounded-2xl overflow-hidden shadow-xl border-4 border-white aspect-4/3 sm:aspect-[4/3.5] bg-slate-900 group">
               <img
-                src="/assets/prakash-hospital-real.jpg"
+                src={getAssetUrl('/assets/prakash-hospital-real.jpg')}
                 alt="Prakash Hospital Building Exterior Suriyawan Bhadohi"
                 loading="lazy"
                 decoding="async"
                 className="w-full h-full object-cover object-top sm:object-center transition-transform duration-500 hover:scale-105"
+                onError={(e) => {
+                  e.currentTarget.src = "https://www.image2url.com/r2/default/images/1790181308424-d62b1f67-92c7-4ac6-bbaa-20c7dcba79ed.jpeg";
+                }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent" />
               <div className="absolute bottom-4 left-4 right-4 text-white">
@@ -99,11 +103,14 @@ export const AboutSection: React.FC = () => {
               <div className="p-4 rounded-2xl bg-white border border-sky-100 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                 <div className="flex items-center gap-3">
                   <img
-                    src="/assets/doctors/dr-op-yadav.jpg"
+                    src={getAssetUrl('/assets/doctors/dr-op-yadav.jpg')}
                     alt="Dr. O.P. Yadav"
                     loading="lazy"
                     decoding="async"
                     className="w-12 h-12 rounded-xl object-cover object-[center_25%] border-2 border-sky-200 shadow-2xs shrink-0"
+                    onError={(e) => {
+                      e.currentTarget.src = getAssetUrl('/assets/doctors/dr-op-yadav.png');
+                    }}
                   />
                   <div>
                     <span className="text-[10px] uppercase font-bold tracking-wider text-sky-700 block">Hospital Owner &amp; Chief Surgeon</span>
@@ -115,11 +122,14 @@ export const AboutSection: React.FC = () => {
 
                 <div className="flex items-center gap-3">
                   <img
-                    src="/assets/team/kamlesh-yadav-manager.jpg"
+                    src={getAssetUrl('/assets/team/kamlesh-yadav-manager.jpg')}
                     alt="Kamlesh Yadav"
                     loading="lazy"
                     decoding="async"
                     className="w-12 h-12 rounded-xl object-cover object-[center_20%] border-2 border-amber-200 shadow-2xs shrink-0"
+                    onError={(e) => {
+                      e.currentTarget.src = getAssetUrl('/assets/team/kamlesh-yadav-manager.jpeg');
+                    }}
                   />
                   <div>
                     <span className="text-[10px] uppercase font-bold tracking-wider text-amber-700 block">Hospital Manager &amp; Help Desk</span>

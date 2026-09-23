@@ -21,6 +21,7 @@ import {
   HelpCircle
 } from 'lucide-react';
 import { HOSPITAL_INFO } from '../data/hospitalData';
+import { getAssetUrl } from '../utils/assetPath';
 
 interface AboutUsPageProps {
   onNavigateToBooking: () => void;
@@ -39,7 +40,7 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({
       bio: 'Hospital Owner and Senior Surgeon leading gastro, proctology, and advanced surgical care at Prakash Hospital since its establishment in 2020, dedicated to bringing ethical, accessible healthcare to Suriyawan, Bhadohi.',
       initials: 'OP',
       badge: 'Hospital Owner & Chief Surgeon',
-      photoUrl: '/assets/doctors/dr-op-yadav.jpg'
+      photoUrl: getAssetUrl('/assets/doctors/dr-op-yadav.jpg')
     },
     {
       name: 'Kamlesh Yadav',
@@ -48,7 +49,7 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({
       bio: 'Hospital Manager overseeing daily operations, patient admissions, emergency coordination, and public inquiries. For any hospital issue, patient assistance, or operational inquiry, please contact Mr. Kamlesh Yadav directly.',
       initials: 'KY',
       badge: 'Hospital Manager',
-      photoUrl: '/assets/team/kamlesh-yadav-manager.jpg',
+      photoUrl: getAssetUrl('/assets/team/kamlesh-yadav-manager.jpg'),
       isManager: true,
       phone: HOSPITAL_INFO.emergencyNumber,
       phoneRaw: HOSPITAL_INFO.emergencyPhoneRaw,
@@ -110,7 +111,7 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({
         {/* Hero Visual Card with Stats Overlay */}
         <div className="relative rounded-3xl overflow-hidden shadow-xl border border-slate-200 bg-slate-900">
           <img
-            src="/assets/prakash-hospital-real.jpg"
+            src={getAssetUrl('/assets/prakash-hospital-real.jpg')}
             alt="Prakash Hospital Real Building Exterior Suriyawan Bhadohi"
             loading="lazy"
             decoding="async"

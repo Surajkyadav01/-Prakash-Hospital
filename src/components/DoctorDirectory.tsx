@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { DOCTORS, DEPARTMENTS } from '../data/hospitalData';
 import { Doctor } from '../types';
+import { getAssetUrl } from '../utils/assetPath';
 
 interface DoctorDirectoryProps {
   selectedDepartmentFilter: string;
@@ -217,16 +218,21 @@ export const DoctorDirectory: React.FC<DoctorDirectoryProps> = ({
                     <div className="relative shrink-0">
                       {doc.photoUrl ? (
                         <img
-                          src={doc.photoUrl}
+                          src={getAssetUrl(doc.photoUrl)}
                           alt={doc.name}
                           loading="lazy"
                           decoding="async"
                           referrerPolicy="no-referrer"
                           className="w-20 h-24 sm:w-24 sm:h-28 rounded-2xl object-cover object-[center_20%] border-2 border-sky-200 shadow-xs"
                           onError={(e) => {
-                            (e.currentTarget as HTMLElement).style.display = 'none';
-                            const fallback = document.getElementById(`doc-fallback-${doc.id}`);
-                            if (fallback) fallback.style.display = 'flex';
+                            // If primary path fails, try png extension
+                            if (doc.photoUrl && !doc.photoUrl.endsWith('.png')) {
+                              e.currentTarget.src = getAssetUrl(doc.photoUrl.replace('.jpg', '.png'));
+                            } else {
+                              (e.currentTarget as HTMLElement).style.display = 'none';
+                              const fallback = document.getElementById(`doc-fallback-${doc.id}`);
+                              if (fallback) fallback.style.display = 'flex';
+                            }
                           }}
                         />
                       ) : null}
