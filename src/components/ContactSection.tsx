@@ -13,6 +13,7 @@ import {
 import { HOSPITAL_INFO } from '../data/hospitalData';
 import { ADMIN_EMAIL, createEnquiryMailtoUrl, recordNotification } from '../utils/notificationService';
 import { CustomSelect } from './CustomSelect';
+import { ScrollReveal } from './ScrollReveal';
 
 export const ContactSection: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -72,22 +73,26 @@ export const ContactSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-100 text-sky-800 text-xs font-bold tracking-wide uppercase mb-3">
-            Reach Out To Us
+        <ScrollReveal animation="fade-up" durationMs={500}>
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-100 text-sky-800 text-xs font-bold tracking-wide uppercase mb-3">
+              Reach Out To Us
+            </div>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
+              Contact & Hospital Location
+            </h2>
+            <p className="mt-3 text-slate-600 text-sm sm:text-base">
+              Conveniently located at Prakash Hospital Bypass Road, Suriyawan, Uttar Pradesh 221404 with dedicated parking, wheelchair access, and 24x7 emergency reception.
+            </p>
           </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
-            Contact & Hospital Location
-          </h2>
-          <p className="mt-3 text-slate-600 text-sm sm:text-base">
-            Conveniently located opposite Old Indian Oil Petrol Pump in Suriyawan, Bhadohi with dedicated parking, wheelchair access, and 24x7 emergency reception.
-          </p>
-        </div>
+        </ScrollReveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* Left Column: Contact Cards & Map Embed */}
-          <div className="lg:col-span-6 space-y-6">
+          <div className="lg:col-span-6">
+            <ScrollReveal animation="fade-right" durationMs={550}>
+              <div className="space-y-6">
             
             {/* Quick Contact Cards Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -170,11 +175,14 @@ export const ContactSection: React.FC = () => {
               </div>
             </div>
 
+              </div>
+            </ScrollReveal>
           </div>
 
           {/* Right Column: Contact & Patient Query Form */}
           <div className="lg:col-span-6">
-            <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200/90 shadow-lg">
+            <ScrollReveal animation="fade-left" durationMs={550}>
+              <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200/90 shadow-lg">
               
               <div className="flex items-center gap-2 mb-2">
                 <MessageSquare className="w-5 h-5 text-sky-600" />
@@ -334,7 +342,8 @@ export const ContactSection: React.FC = () => {
                 </form>
               )}
 
-            </div>
+              </div>
+            </ScrollReveal>
           </div>
 
         </div>

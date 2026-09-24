@@ -70,7 +70,7 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({
     {
       year: '2020',
       title: 'Foundation of Prakash Hospital (स्थापना)',
-      description: 'Inaugurated in 2020 as a modern multi-speciality hospital opposite the Old Indian Oil Petrol Pump in Suriyawan, Bhadohi to provide quality, accessible healthcare.'
+      description: 'Inaugurated in 2020 as a modern multi-speciality hospital at Prakash Hospital Bypass Road, Suriyawan, Uttar Pradesh 221404 to provide quality, accessible healthcare.'
     },
     {
       year: '2021 - 2022',
@@ -85,7 +85,7 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({
     {
       year: 'Present',
       title: '40-Bed Modern Healthcare & Cashless Facility',
-      description: 'Fully equipped 40-bed healthcare center with 15+ specialist doctors, 1,000+ successful surgeries performed, and round-the-clock emergency support.'
+      description: 'Fully equipped 40-bed healthcare center with 15+ specialist doctors, 4,500+ successful surgeries performed, and round-the-clock emergency support.'
     }
   ];
 
@@ -109,18 +109,22 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({
         </div>
 
         {/* Hero Visual Card with Stats Overlay */}
-        <div className="relative rounded-3xl overflow-hidden shadow-xl border border-slate-200 bg-slate-900">
-          <img
-            src={getAssetUrl('/assets/prakash-hospital-real.jpg')}
-            alt="Prakash Hospital Real Building Exterior Suriyawan Bhadohi"
-            loading="lazy"
-            decoding="async"
-            className="w-full h-80 sm:h-[440px] md:h-[500px] lg:h-[540px] object-cover object-[center_28%] transition-transform duration-700 hover:scale-102"
-            onError={(e) => {
-              e.currentTarget.src = "https://www.image2url.com/r2/default/images/1790181308424-d62b1f67-92c7-4ac6-bbaa-20c7dcba79ed.jpeg";
-            }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/35 to-slate-900/10" />
+        <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-200 bg-slate-950">
+          <picture>
+            <source srcSet={getAssetUrl('/assets/prakash-hospital-real.webp')} type="image/webp" />
+            <img
+              src={getAssetUrl('/assets/prakash-hospital-real.jpg')}
+              alt="Prakash Hospital 7-Story Modern Building Exterior Suriyawan Bhadohi"
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
+              className="w-full h-auto min-h-[300px] sm:min-h-[460px] md:min-h-[540px] max-h-[700px] object-cover object-[center_35%] transition-transform duration-700 hover:scale-[1.01]"
+              onError={(e) => {
+                e.currentTarget.src = "https://www.image2url.com/r2/default/images/1790235449576-906af834-b306-4f3d-bea1-394c4f26dc1d.jpeg";
+              }}
+            />
+          </picture>
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent pointer-events-none" />
           
           <div className="absolute bottom-6 left-6 right-6 text-white flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div>
@@ -169,7 +173,7 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({
           </div>
 
           <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs text-center">
-            <span className="text-3xl sm:text-4xl font-black text-rose-600">1,000+</span>
+            <span className="text-3xl sm:text-4xl font-black text-rose-600">4,500+</span>
             <span className="block text-xs font-bold text-slate-800 mt-1">Successful Surgeries</span>
             <p className="text-[11px] text-slate-500 mt-0.5">Zero-infection focus</p>
           </div>
@@ -257,6 +261,8 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({
                         <img
                           src={getAssetUrl(leader.photoUrl)}
                           alt={leader.name}
+                          loading="eager"
+                          decoding="async"
                           className="w-full h-full object-cover object-[center_20%] relative z-10"
                           onError={(e) => {
                             const img = e.currentTarget;

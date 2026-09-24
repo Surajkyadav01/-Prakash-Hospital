@@ -54,6 +54,7 @@ export interface GalleryItem {
   category: 'facilities' | 'wards' | 'tech_labs';
   categoryLabel: string;
   imageUrl: string;
+  fallbackUrl?: string;
   caption: string;
 }
 

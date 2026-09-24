@@ -19,11 +19,37 @@ import { AmbulanceDispatchPage } from './components/AmbulanceDispatchPage';
 import { Footer } from './components/Footer';
 import { AmbulanceModal } from './components/AmbulanceModal';
 import { DirectionsModal } from './components/DirectionsModal';
+import { LazySection } from './components/LazySection';
 import { Doctor, PageView } from './types';
+import { getAssetUrl } from './utils/assetPath';
 
 export default function App() {
   // Global View Routing state
   const [currentView, setCurrentView] = useState<PageView>('home');
+
+  // Background idle preloader for critical visual assets
+  useEffect(() => {
+    const preloadList = [
+      getAssetUrl('/assets/prakash-hospital-real.webp'),
+      getAssetUrl('/assets/prakash-hospital-real.jpg'),
+      getAssetUrl('/assets/doctors/dr-op-yadav.jpg'),
+      getAssetUrl('/assets/team/kamlesh-yadav-manager.jpg'),
+      'https://www.image2url.com/r2/default/images/1790235449576-906af834-b306-4f3d-bea1-394c4f26dc1d.jpeg'
+    ];
+
+    const preloadImages = () => {
+      preloadList.forEach((src) => {
+        const img = new Image();
+        img.src = src;
+      });
+    };
+
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(preloadImages, { timeout: 1500 });
+    } else {
+      setTimeout(preloadImages, 800);
+    }
+  }, []);
 
   // Parameters passed to booking view
   const [bookingDeptId, setBookingDeptId] = useState<string>('cardiology');
@@ -139,45 +165,63 @@ export default function App() {
             />
 
             {/* Key Departments & Super Speciality Preview Grid */}
-            <DepartmentGrid
-              onSelectDepartmentForDoctors={handleSelectDepartmentForDoctors}
-              onOpenBookingForDept={handleOpenBookingForDept}
-            />
+            <LazySection minHeight="500px">
+              <DepartmentGrid
+                onSelectDepartmentForDoctors={handleSelectDepartmentForDoctors}
+                onOpenBookingForDept={handleOpenBookingForDept}
+              />
+            </LazySection>
 
             {/* Doctors Directory Preview */}
-            <DoctorDirectory
-              selectedDepartmentFilter={doctorDirectoryFilter}
-              onFilterChange={(deptId) => setDoctorDirectoryFilter(deptId)}
-              onBookDoctor={handleBookDoctor}
-            />
+            <LazySection minHeight="550px">
+              <DoctorDirectory
+                selectedDepartmentFilter={doctorDirectoryFilter}
+                onFilterChange={(deptId) => setDoctorDirectoryFilter(deptId)}
+                onBookDoctor={handleBookDoctor}
+              />
+            </LazySection>
 
             {/* Hospital Photo Gallery Section */}
-            <FacilityGallery />
+            <LazySection minHeight="450px">
+              <FacilityGallery />
+            </LazySection>
 
             {/* Cashless TPA / Insurance Row */}
-            <TpaPartners />
+            <LazySection minHeight="250px">
+              <TpaPartners />
+            </LazySection>
 
             {/* 24 X 7 Services Section */}
-            <Services24x7Section
-              onOpenAmbulance={() => handleNavigate('ambulance')}
-              onOpenBooking={() => handleNavigate('book-appointment')}
-            />
+            <LazySection minHeight="450px">
+              <Services24x7Section
+                onOpenAmbulance={() => handleNavigate('ambulance')}
+                onOpenBooking={() => handleNavigate('book-appointment')}
+              />
+            </LazySection>
 
             {/* About Us Summary */}
-            <AboutSection />
+            <LazySection minHeight="500px">
+              <AboutSection />
+            </LazySection>
 
             {/* Health Blog Section */}
-            <BlogSection 
-              onOpenBooking={() => handleNavigate('book-appointment')}
-            />
+            <LazySection minHeight="450px">
+              <BlogSection 
+                onOpenBooking={() => handleNavigate('book-appointment')}
+              />
+            </LazySection>
 
             {/* Compact FAQ Section */}
-            <FaqSection 
-              onOpenBooking={() => handleNavigate('book-appointment')}
-            />
+            <LazySection minHeight="350px">
+              <FaqSection 
+                onOpenBooking={() => handleNavigate('book-appointment')}
+              />
+            </LazySection>
 
             {/* Contacts & Map Section */}
-            <ContactSection />
+            <LazySection minHeight="500px">
+              <ContactSection />
+            </LazySection>
           </div>
         )}
 

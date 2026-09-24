@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Maximize2, X, ChevronLeft, ChevronRight, Eye } from 'lucide-react';
 import { GALLERY_ITEMS } from '../data/hospitalData';
 import { GalleryItem } from '../types';
+import { ScrollReveal } from './ScrollReveal';
+import { getAssetUrl } from '../utils/assetPath';
 
 export const FacilityGallery: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<'all' | 'facilities' | 'wards' | 'tech_labs'>('all');
@@ -40,17 +42,19 @@ export const FacilityGallery: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-10">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50 border border-sky-100 text-sky-700 text-xs font-bold tracking-wide uppercase mb-3">
-            Infrastructure & Equipment
+        <ScrollReveal animation="fade-up" durationMs={500}>
+          <div className="text-center max-w-3xl mx-auto mb-10">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50 border border-sky-100 text-sky-700 text-xs font-bold tracking-wide uppercase mb-3">
+              Infrastructure & Equipment
+            </div>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
+              Hospital Photo Gallery & Facilities Tour
+            </h2>
+            <p className="mt-3 text-slate-600 text-sm sm:text-base leading-relaxed">
+              Take a virtual tour of our NABH-accredited facility including modular operation theatres, intensive care suites, and advanced robotic diagnostic setups.
+            </p>
           </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
-            Hospital Photo Gallery & Facilities Tour
-          </h2>
-          <p className="mt-3 text-slate-600 text-sm sm:text-base leading-relaxed">
-            Take a virtual tour of our NABH-accredited facility including modular operation theatres, intensive care suites, and advanced robotic diagnostic setups.
-          </p>
-        </div>
+        </ScrollReveal>
 
         {/* Category Filter Tabs */}
         <div className="flex items-center justify-center gap-2 mb-8 overflow-x-auto pb-2">
@@ -75,51 +79,68 @@ export const FacilityGallery: React.FC = () => {
 
         {/* Gallery Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-          {filteredItems.map((item) => (
-            <div
+          {filteredItems.map((item, idx) => (
+            <ScrollReveal
               key={item.id}
-              onClick={() => setSelectedImage(item)}
-              id={`gallery-item-${item.id}`}
-              className="group relative rounded-2xl overflow-hidden bg-slate-900 border border-slate-200/60 shadow-xs hover:shadow-xl transition-all duration-300 cursor-pointer aspect-4/3 flex flex-col justify-end"
+              animation="zoom-in"
+              delayMs={(idx % 4) * 60}
+              durationMs={450}
+              className="h-full"
             >
-              {/* Image */}
-              <img
-                src={item.imageUrl}
-                alt={item.title}
-                referrerPolicy="no-referrer"
-                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-                loading="lazy"
-                decoding="async"
-              />
+              <div
+                onClick={() => setSelectedImage(item)}
+                id={`gallery-item-${item.id}`}
+                className="group relative rounded-2xl overflow-hidden bg-slate-900 border border-slate-200/60 shadow-xs hover:shadow-xl transition-all duration-300 cursor-pointer aspect-4/3 flex flex-col justify-end h-full"
+              >
+                {/* Image */}
+                <img
+                  src={item.imageUrl}
+                  alt={item.title}
+                  referrerPolicy="no-referrer"
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                  loading={idx === 0 ? "eager" : "lazy"}
+                  decoding="async"
+                  onError={(e) => {
+                    const target = e.currentTarget;
+                    if (!target.dataset.triedJpg && item.id === 'gal-0') {
+                      target.dataset.triedJpg = 'true';
+                      target.src = getAssetUrl('/assets/prakash-hospital-real.jpg');
+                    } else if (!target.dataset.triedFallback && item.fallbackUrl) {
+                      target.dataset.triedFallback = 'true';
+                      target.src = item.fallbackUrl;
+                    }
+                  }}
+                />
 
-              {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-900/30 to-transparent" />
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-900/30 to-transparent" />
 
-              {/* Top Tag & Zoom icon */}
-              <div className="absolute top-3 inset-x-3 flex items-center justify-between pointer-events-none">
-                <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-white/90 text-slate-800 backdrop-blur-xs shadow-xs">
-                  {item.categoryLabel}
-                </span>
-                <div className="w-7 h-7 rounded-full bg-slate-900/60 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                  <Maximize2 className="w-3.5 h-3.5" />
+                {/* Top Tag & Zoom icon */}
+                <div className="absolute top-3 inset-x-3 flex items-center justify-between pointer-events-none">
+                  <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-white/90 text-slate-800 backdrop-blur-xs shadow-xs">
+                    {item.categoryLabel}
+                  </span>
+                  <div className="w-7 h-7 rounded-full bg-slate-900/60 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <Maximize2 className="w-3.5 h-3.5" />
+                  </div>
                 </div>
-              </div>
 
-              {/* Bottom Caption */}
-              <div className="relative p-4 text-white">
-                <h3 className="font-bold text-sm sm:text-base leading-snug group-hover:text-sky-300 transition-colors line-clamp-1">
-                  {item.title}
-                </h3>
-                <p className="text-[11px] text-slate-300 mt-1 line-clamp-2 leading-relaxed font-normal">
-                  {item.caption}
-                </p>
-                <div className="mt-2 flex items-center gap-1 text-[11px] font-semibold text-sky-400">
-                  <Eye className="w-3.5 h-3.5" />
-                  <span>Click to expand</span>
+                {/* Bottom Caption */}
+                <div className="relative p-4 text-white">
+                  <h3 className="font-bold text-sm sm:text-base leading-snug group-hover:text-sky-300 transition-colors line-clamp-1">
+                    {item.title}
+                  </h3>
+                  <p className="text-[11px] text-slate-300 mt-1 line-clamp-2 leading-relaxed font-normal">
+                    {item.caption}
+                  </p>
+                  <div className="mt-2 flex items-center gap-1 text-[11px] font-semibold text-sky-400">
+                    <Eye className="w-3.5 h-3.5" />
+                    <span>Click to expand</span>
+                  </div>
                 </div>
-              </div>
 
-            </div>
+              </div>
+            </ScrollReveal>
           ))}
         </div>
 
@@ -161,6 +182,17 @@ export const FacilityGallery: React.FC = () => {
                 alt={selectedImage.title}
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-contain"
+                decoding="async"
+                onError={(e) => {
+                  const target = e.currentTarget;
+                  if (!target.dataset.triedJpg && selectedImage.id === 'gal-0') {
+                    target.dataset.triedJpg = 'true';
+                    target.src = getAssetUrl('/assets/prakash-hospital-real.jpg');
+                  } else if (!target.dataset.triedFallback && selectedImage.fallbackUrl) {
+                    target.dataset.triedFallback = 'true';
+                    target.src = selectedImage.fallbackUrl;
+                  }
+                }}
               />
 
               {/* Prev / Next Controls */}

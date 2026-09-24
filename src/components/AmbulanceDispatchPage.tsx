@@ -42,7 +42,7 @@ export const AmbulanceDispatchPage: React.FC<AmbulanceDispatchPageProps> = ({
   const [dispatchId, setDispatchId] = useState('');
 
   const quickSectors = [
-    'Near Old Petrol Pump (Hospital Gate)',
+    'Bypass Road (Hospital Gate)',
     'Suriyawan Main Market',
     'Suriyawan Railway Station Road',
     'Bhadohi Road',
@@ -350,7 +350,7 @@ export const AmbulanceDispatchPage: React.FC<AmbulanceDispatchPageProps> = ({
                   <textarea
                     rows={3}
                     required
-                    placeholder="House/Flat No., Mohalla/Village, Street or Nearest Landmark (e.g., Near Old Petrol Pump, Suriyawan)..."
+                    placeholder="House/Flat No., Mohalla/Village, Street or Nearest Landmark (e.g., Bypass Road, Suriyawan)..."
                     value={pickupAddress}
                     onChange={(e) => setPickupAddress(e.target.value)}
                     className="w-full bg-slate-50 border border-slate-300 rounded-2xl p-3.5 text-sm focus:bg-white focus:ring-2 focus:ring-red-500 outline-none transition-all"
@@ -591,7 +591,7 @@ export const AmbulanceDispatchPage: React.FC<AmbulanceDispatchPageProps> = ({
                 </h3>
 
                 <p className="text-xs text-slate-300 leading-relaxed">
-                  Located opposite Old Indian Oil Petrol Pump in Suriyawan, Bhadohi with zero red-light ramp entry, immediate emergency resuscitation bay, and 24x7 doctor coverage.
+                  Located at Prakash Hospital Bypass Road, Suriyawan, Uttar Pradesh 221404 with zero red-light ramp entry, immediate emergency resuscitation bay, and 24x7 doctor coverage.
                 </p>
 
                 <div className="p-3 bg-white/10 rounded-xl text-xs space-y-1.5 border border-white/10">

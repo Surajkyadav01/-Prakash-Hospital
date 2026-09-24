@@ -48,7 +48,7 @@ export const DirectionsModal: React.FC<DirectionsModalProps> = ({
               {HOSPITAL_INFO.address}
             </p>
             <p className="text-xs text-sky-700 font-semibold mt-1">
-              Prominent Landmark: Opposite Old Indian Oil Petrol Pump, Suriyawan
+              Bypass Road, Suriyawan, Uttar Pradesh 221404
             </p>
           </div>
 

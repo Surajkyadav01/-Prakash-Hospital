@@ -1,5 +1,6 @@
 import { REAL_DOCTORS } from "./doctorsData";
 import { Department, Doctor, GalleryItem, TPAPartner, BlogPost } from '../types';
+import { getAssetUrl } from '../utils/assetPath';
 
 export const HOSPITAL_INFO = {
   name: 'Prakash Hospital & Multi-Speciality Care',
@@ -14,7 +15,7 @@ export const HOSPITAL_INFO = {
   opdHelpline: '+91 83838 26205',
   whatsappNumber: '+91 83838 26205',
   whatsappUrl: 'https://wa.me/918383826205?text=Hello%20Prakash%20Hospital,%20I%20want%20to%20enquire%20about%20healthcare%20services',
-  address: 'Prakash Hospital, opp. Old Indian Oil Petrol Pump, Bhadohi, Suriyawan, Uttar Pradesh 221404',
+  address: 'Prakash Hospital Bypass Road, Suriyawan, Uttar Pradesh 221404',
   mapsEmbedUrl: 'https://maps.google.com/maps?q=Prakash+Hospital,+opp.+Old+Indian+Oil+Petrol+Pump,+Bhadohi,+Suriyawan,+Uttar+Pradesh+221404&t=&z=15&ie=UTF8&iwloc=&output=embed',
   googleMapsDirections: 'https://maps.google.com/?q=Prakash+Hospital,+opp.+Old+Indian+Oil+Petrol+Pump,+Bhadohi,+Suriyawan,+Uttar+Pradesh+221404',
   email: 'kamlesh8383826205@gmail.com',
@@ -167,6 +168,15 @@ export const DEPARTMENTS: Department[] = [
 export const DOCTORS: Doctor[] = REAL_DOCTORS;
 
 export const GALLERY_ITEMS: GalleryItem[] = [
+  {
+    id: 'gal-0',
+    title: 'Prakash Hospital 7-Story Building Exterior',
+    category: 'facilities',
+    categoryLabel: 'Hospital',
+    imageUrl: getAssetUrl('/assets/prakash-hospital-real.webp'),
+    fallbackUrl: 'https://www.image2url.com/r2/default/images/1790235449576-906af834-b306-4f3d-bea1-394c4f26dc1d.jpeg',
+    caption: 'Modern 7-story multi-speciality tertiary care building in Suriyawan, Bhadohi with 24x7 Emergency, ICU, and Modular Operation Theatres.'
+  },
   {
     id: 'gal-1',
     title: 'Advanced Intensive Care Unit (ICU)',

@@ -27,6 +27,15 @@
     <link rel="apple-touch-icon" href="./favicon-192.png" />
     <meta name="theme-color" content="#0369a1" />
 
+    <!-- Preload Critical Images for Instant Display -->
+    <link rel="dns-prefetch" href="https://www.image2url.com" />
+    <link rel="preconnect" href="https://www.image2url.com" crossorigin />
+    <link rel="dns-prefetch" href="https://images.unsplash.com" />
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+    <link rel="preload" as="image" href="./assets/prakash-hospital-logo.webp" type="image/webp" fetchpriority="high" />
+    <link rel="preload" as="image" href="./assets/prakash-hospital-real.webp" type="image/webp" fetchpriority="high" />
+    <link rel="preload" as="image" href="./assets/prakash-hospital-real.jpg" type="image/jpeg" fetchpriority="high" />
+
     <!-- OpenGraph / Facebook / WhatsApp Social Card -->
     <meta property="og:type" content="hospital" />
     <meta property="og:site_name" content="Prakash Hospital & Multi-Speciality Care" />
@@ -80,7 +89,7 @@
           "paymentAccepted": "Cash, UPI, Debit Card, Credit Card, Cashless Health Insurance, Ayushman Bharat PM-JAY",
           "address": {
             "@type": "PostalAddress",
-            "streetAddress": "Main Road / Station Road",
+            "streetAddress": "Prakash Hospital Bypass Road",
             "addressLocality": "Suriyawan",
             "addressRegion": "Uttar Pradesh",
             "postalCode": "221404",

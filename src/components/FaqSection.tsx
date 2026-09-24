@@ -8,11 +8,12 @@ import {
   ShieldCheck, 
   Activity, 
   Building2, 
-  FileText,
+  FileText, 
   Clock,
   CheckCircle2,
   Sparkles
 } from 'lucide-react';
+import { ScrollReveal } from './ScrollReveal';
 
 interface FaqItem {
   id: string;
@@ -62,7 +63,7 @@ const FAQ_DATA: FaqItem[] = [
     id: 'faq-6',
     category: 'booking',
     question: 'Where is the hospital located and how do I contact management?',
-    answer: 'Prakash Hospital is located on Main Station Road, Suriyawan, Bhadohi (UP - 221404). For admissions or patient support, contact Hospital Manager Kamlesh Yadav directly at +91 83838 26205.',
+    answer: 'Prakash Hospital is located at Prakash Hospital Bypass Road, Suriyawan, Uttar Pradesh 221404. For admissions or patient support, contact Hospital Manager Kamlesh Yadav directly at +91 83838 26205.',
     icon: Clock
   }
 ];
@@ -96,38 +97,41 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ onOpenBooking }) => {
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
         
         {/* Sleek Compact Header */}
-        <div className="text-center max-w-xl mx-auto mb-5">
-          <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-sky-100 text-sky-800 text-[11px] font-bold uppercase tracking-wider mb-1.5">
-            <HelpCircle className="w-3 h-3 text-sky-600" />
-            <span>Support & FAQs</span>
-          </div>
-          <h2 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight">
-            Frequently Asked Questions
-          </h2>
-          <p className="mt-1 text-xs text-slate-500">
-            Quick answers about appointments, emergency trauma care, insurance, and medical facilities.
-          </p>
+        <ScrollReveal animation="fade-up" durationMs={500}>
+          <div className="text-center max-w-xl mx-auto mb-5">
+            <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-sky-100 text-sky-800 text-[11px] font-bold uppercase tracking-wider mb-1.5">
+              <HelpCircle className="w-3 h-3 text-sky-600" />
+              <span>Support & FAQs</span>
+            </div>
+            <h2 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight">
+              Frequently Asked Questions
+            </h2>
+            <p className="mt-1 text-xs text-slate-500">
+              Quick answers about appointments, emergency trauma care, insurance, and medical facilities.
+            </p>
 
-          {/* Compact Category Tabs */}
-          <div className="flex flex-wrap items-center justify-center gap-1 mt-3">
-            {categories.map((cat) => (
-              <button
-                key={cat.id}
-                onClick={() => setActiveTab(cat.id)}
-                className={`px-2.5 py-1 rounded-md text-[11px] font-medium transition-all cursor-pointer ${
-                  activeTab === cat.id
-                    ? 'bg-sky-600 text-white shadow-2xs font-semibold'
-                    : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 hover:text-slate-900'
-                }`}
-              >
-                {cat.label}
-              </button>
-            ))}
+            {/* Compact Category Tabs */}
+            <div className="flex flex-wrap items-center justify-center gap-1 mt-3">
+              {categories.map((cat) => (
+                <button
+                  key={cat.id}
+                  onClick={() => setActiveTab(cat.id)}
+                  className={`px-2.5 py-1 rounded-md text-[11px] font-medium transition-all cursor-pointer ${
+                    activeTab === cat.id
+                      ? 'bg-sky-600 text-white shadow-2xs font-semibold'
+                      : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 hover:text-slate-900'
+                  }`}
+                >
+                  {cat.label}
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
+        </ScrollReveal>
 
         {/* Compact Low-Profile Accordion List */}
-        <div className="space-y-1.5">
+        <ScrollReveal animation="fade-up" delayMs={100} durationMs={500}>
+          <div className="space-y-1.5">
           {filteredFaqs.map((faq) => {
             const isOpen = openId === faq.id;
             const Icon = faq.icon;
@@ -175,7 +179,8 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ onOpenBooking }) => {
               </div>
             );
           })}
-        </div>
+          </div>
+        </ScrollReveal>
 
         {/* Compact Quick Assistance Strip */}
         <div className="mt-4 rounded-xl bg-gradient-to-r from-slate-900 to-sky-950 p-2.5 sm:p-3 text-white shadow-xs flex flex-col sm:flex-row items-center justify-between gap-2.5">

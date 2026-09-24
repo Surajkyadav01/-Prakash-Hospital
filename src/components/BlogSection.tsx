@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { BookOpen, Calendar, Clock, User, ArrowRight, ArrowLeft, CheckCircle2, Stethoscope, Share2 } from 'lucide-react';
 import { BLOG_POSTS } from '../data/hospitalData';
 import { BlogPost } from '../types';
+import { ScrollReveal } from './ScrollReveal';
 
 interface BlogSectionProps {
   isStandalonePage?: boolean;
@@ -119,28 +120,36 @@ export const BlogSection: React.FC<BlogSectionProps> = ({
           /* Main Articles Grid */
           <>
             {/* Header */}
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-              <div>
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50 border border-sky-100 text-sky-700 text-xs font-bold tracking-wide uppercase mb-2">
-                  <BookOpen className="w-3.5 h-3.5 text-sky-600" />
-                  <span>Health Awareness & Doctor Insights</span>
+            <ScrollReveal animation="fade-up" durationMs={500}>
+              <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div>
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50 border border-sky-100 text-sky-700 text-xs font-bold tracking-wide uppercase mb-2">
+                    <BookOpen className="w-3.5 h-3.5 text-sky-600" />
+                    <span>Health Awareness & Doctor Insights</span>
+                  </div>
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
+                    Hospital Blog & Preventive Medicine Advice
+                  </h2>
+                  <p className="mt-2 text-slate-600 text-sm sm:text-base max-w-2xl">
+                    Medically verified clinical articles, golden hour awareness, and preventive wellness advice written by senior consultants at Prakash Hospital.
+                  </p>
                 </div>
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
-                  Hospital Blog & Preventive Medicine Advice
-                </h2>
-                <p className="mt-2 text-slate-600 text-sm sm:text-base max-w-2xl">
-                  Medically verified clinical articles, golden hour awareness, and preventive wellness advice written by senior consultants at Prakash Hospital.
-                </p>
               </div>
-            </div>
+            </ScrollReveal>
 
             {/* Blog Posts Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {BLOG_POSTS.map((post) => (
-                <article
+              {BLOG_POSTS.map((post, idx) => (
+                <ScrollReveal
                   key={post.id}
-                  className="bg-white rounded-2xl border border-slate-200/90 shadow-xs hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col justify-between group"
+                  animation="fade-up"
+                  delayMs={(idx % 3) * 80}
+                  durationMs={450}
+                  className="h-full"
                 >
+                  <article
+                    className="h-full bg-white rounded-2xl border border-slate-200/90 shadow-xs hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col justify-between group"
+                  >
                   <div>
                     {/* Post Image */}
                     <div className="relative aspect-16/10 overflow-hidden bg-slate-100">
@@ -204,8 +213,9 @@ export const BlogSection: React.FC<BlogSectionProps> = ({
                   </div>
 
                 </article>
-              ))}
-            </div>
+              </ScrollReveal>
+            ))}
+          </div>
           </>
         )}
 

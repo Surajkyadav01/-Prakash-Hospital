@@ -2,13 +2,14 @@ import React from 'react';
 import { Award, ShieldCheck, Heart, Users, Bed, Activity, CheckCircle2 } from 'lucide-react';
 import { HOSPITAL_INFO } from '../data/hospitalData';
 import { getAssetUrl } from '../utils/assetPath';
+import { ScrollReveal } from './ScrollReveal';
 
 export const AboutSection: React.FC = () => {
   const stats = [
     { label: 'Years of Clinical Trust', value: '10+', icon: Award },
     { label: 'Specialist Consultants', value: '15+', icon: Users },
     { label: 'Hospital Beds', value: '40', icon: Bed },
-    { label: 'Surgeries Performed', value: '1,000+', icon: Activity },
+    { label: 'Surgeries Performed', value: '4,500+', icon: Activity },
   ];
 
   return (
@@ -17,52 +18,62 @@ export const AboutSection: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
           {/* Left Column: Image with Stats overlay */}
-          <div className="lg:col-span-5 relative">
-            <div className="relative rounded-2xl overflow-hidden shadow-xl border-4 border-white aspect-4/3 sm:aspect-[4/3.5] bg-slate-900 group">
-              <img
-                src={getAssetUrl('/assets/prakash-hospital-real.jpg')}
-                alt="Prakash Hospital Building Exterior Suriyawan Bhadohi"
-                loading="lazy"
-                decoding="async"
-                className="w-full h-full object-cover object-top sm:object-center transition-transform duration-500 hover:scale-105"
-                onError={(e) => {
-                  e.currentTarget.src = "https://www.image2url.com/r2/default/images/1790181308424-d62b1f67-92c7-4ac6-bbaa-20c7dcba79ed.jpeg";
-                }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent" />
-              <div className="absolute bottom-4 left-4 right-4 text-white">
-                <div className="flex items-center gap-1 text-sky-400 text-xs font-bold uppercase tracking-wider mb-1">
-                  <ShieldCheck className="w-4 h-4" />
-                  <span>Quality Benchmark</span>
+          <div className="lg:col-span-5">
+            <ScrollReveal animation="fade-right" durationMs={550}>
+              <div className="relative">
+                <div className="relative rounded-2xl overflow-hidden shadow-xl border-4 border-white aspect-[16/9] sm:aspect-[16/10] bg-slate-900 group">
+                  <picture>
+                    <source srcSet={getAssetUrl('/assets/prakash-hospital-real.webp')} type="image/webp" />
+                    <img
+                      src={getAssetUrl('/assets/prakash-hospital-real.jpg')}
+                      alt="Prakash Hospital 7-Story Building Suriyawan Bhadohi"
+                      loading="eager"
+                      fetchPriority="high"
+                      decoding="async"
+                      className="w-full h-full object-cover object-[center_35%] transition-transform duration-500 hover:scale-105"
+                      onError={(e) => {
+                        e.currentTarget.src = "https://www.image2url.com/r2/default/images/1790235449576-906af834-b306-4f3d-bea1-394c4f26dc1d.jpeg";
+                      }}
+                    />
+                  </picture>
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent pointer-events-none" />
+                  <div className="absolute bottom-4 left-4 right-4 text-white">
+                    <div className="flex items-center gap-1 text-sky-400 text-xs font-bold uppercase tracking-wider mb-1">
+                      <ShieldCheck className="w-4 h-4" />
+                      <span>Quality Benchmark</span>
+                    </div>
+                    <h4 className="font-extrabold text-base sm:text-lg">
+                      NABH & NABL Accredited Healthcare
+                    </h4>
+                    <p className="text-xs text-slate-200 mt-1">
+                      Pioneering modern healthcare services in Suriyawan, Bhadohi since 2020.
+                    </p>
+                  </div>
                 </div>
-                <h4 className="font-extrabold text-base sm:text-lg">
-                  NABH & NABL Accredited Healthcare
-                </h4>
-                <p className="text-xs text-slate-200 mt-1">
-                  Pioneering modern healthcare services in Suriyawan, Bhadohi since 2020.
-                </p>
-              </div>
-            </div>
 
-            {/* Experience Floater Badge */}
-            <div className="absolute -top-4 -right-4 bg-sky-600 text-white rounded-2xl p-4 shadow-lg border-2 border-white flex flex-col items-center">
-              <span className="text-2xl sm:text-3xl font-black leading-none">10+</span>
-              <span className="text-[10px] uppercase font-bold tracking-wider mt-1 text-sky-100">Years Trust</span>
-            </div>
+                {/* Experience Floater Badge */}
+                <div className="absolute -top-4 -right-4 bg-sky-600 text-white rounded-2xl p-4 shadow-lg border-2 border-white flex flex-col items-center">
+                  <span className="text-2xl sm:text-3xl font-black leading-none">10+</span>
+                  <span className="text-[10px] uppercase font-bold tracking-wider mt-1 text-sky-100">Years Trust</span>
+                </div>
+              </div>
+            </ScrollReveal>
           </div>
 
           {/* Right Column: Mission, Vision, and Credentials */}
-          <div className="lg:col-span-7 space-y-5">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-100 text-sky-800 text-xs font-bold tracking-wide uppercase">
-              About Prakash Hospital
-            </div>
+          <div className="lg:col-span-7">
+            <ScrollReveal animation="fade-left" durationMs={550}>
+              <div className="space-y-5">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-100 text-sky-800 text-xs font-bold tracking-wide uppercase">
+                  About Prakash Hospital
+                </div>
 
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
               Pioneering Ethical & Modern Healthcare in Bhadohi, Suriyawan
             </h2>
 
             <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-              Founded with the vision to deliver advanced medical treatment accessible to all, Prakash Hospital stands as a premier multi-speciality healthcare institution located opposite the Old Indian Oil Petrol Pump in Suriyawan, Bhadohi.
+              Founded with the vision to deliver advanced medical treatment accessible to all, Prakash Hospital stands as a premier multi-speciality healthcare institution located at Prakash Hospital Bypass Road, Suriyawan, Uttar Pradesh 221404.
             </p>
 
             <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
@@ -139,7 +150,8 @@ export const AboutSection: React.FC = () => {
                 </div>
               </div>
             </div>
-
+            </div>
+            </ScrollReveal>
           </div>
 
         </div>

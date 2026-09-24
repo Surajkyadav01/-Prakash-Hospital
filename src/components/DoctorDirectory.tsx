@@ -14,6 +14,7 @@ import {
 import { DOCTORS, DEPARTMENTS } from '../data/hospitalData';
 import { Doctor } from '../types';
 import { getAssetUrl } from '../utils/assetPath';
+import { ScrollReveal } from './ScrollReveal';
 
 interface DoctorDirectoryProps {
   selectedDepartmentFilter: string;
@@ -141,40 +142,42 @@ export const DoctorDirectory: React.FC<DoctorDirectoryProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
-          <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-100 text-sky-800 text-xs font-bold tracking-wide uppercase mb-2">
-              Our Medical Team
+        <ScrollReveal animation="fade-up" durationMs={500}>
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+            <div>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-100 text-sky-800 text-xs font-bold tracking-wide uppercase mb-2">
+                Our Medical Team
+              </div>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
+                Comprehensive Doctors Directory
+              </h2>
+              <p className="mt-2 text-slate-600 text-sm sm:text-base max-w-2xl">
+                Meet our team of senior consultants, surgeons, and specialists available at Prakash Hospital & Multi-Speciality Care.
+              </p>
             </div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
-              Comprehensive Doctors Directory
-            </h2>
-            <p className="mt-2 text-slate-600 text-sm sm:text-base max-w-2xl">
-              Meet our team of senior consultants, surgeons, and specialists available at Prakash Hospital & Multi-Speciality Care.
-            </p>
-          </div>
 
-          {/* Search Box */}
-          <div className="relative w-full md:w-80">
-            <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-            <input
-              type="text"
-              placeholder="Search doctor, specialty, degree..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 shadow-2xs"
-            />
-            {searchQuery && (
-              <button
-                type="button"
-                onClick={() => setSearchQuery('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-semibold text-slate-400 hover:text-slate-700 cursor-pointer"
-              >
-                Clear
-              </button>
-            )}
+            {/* Search Box */}
+            <div className="relative w-full md:w-80">
+              <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+              <input
+                type="text"
+                placeholder="Search doctor, specialty, degree..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 shadow-2xs"
+              />
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery('')}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-semibold text-slate-400 hover:text-slate-700 cursor-pointer"
+                >
+                  Clear
+                </button>
+              )}
+            </div>
           </div>
-        </div>
+        </ScrollReveal>
 
         {/* Filterable Tabs by Department (Horizontal Scroll on Mobile) */}
         <div className="flex items-center gap-2 overflow-x-auto pb-3 mb-8 no-scrollbar scroll-smooth">
@@ -204,12 +207,18 @@ export const DoctorDirectory: React.FC<DoctorDirectoryProps> = ({
         {/* Doctor Profile Cards Grid */}
         {filteredDoctors.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredDoctors.map((doc) => (
-              <div
+            {filteredDoctors.map((doc, idx) => (
+              <ScrollReveal
                 key={doc.id}
-                id={`doctor-card-${doc.id}`}
-                className="bg-white rounded-2xl border border-slate-200/90 shadow-xs hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col justify-between"
+                animation="fade-up"
+                delayMs={(idx % 3) * 70}
+                durationMs={500}
+                className="h-full"
               >
+                <div
+                  id={`doctor-card-${doc.id}`}
+                  className="h-full bg-white rounded-2xl border border-slate-200/90 shadow-xs hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col justify-between"
+                >
                 {/* Top Section with Doctor Identity & Details */}
                 <div className="p-5 sm:p-6 flex-1 flex flex-col">
                   <div className="flex gap-4 items-start">
@@ -341,6 +350,7 @@ export const DoctorDirectory: React.FC<DoctorDirectoryProps> = ({
                 </div>
 
               </div>
+              </ScrollReveal>
             ))}
           </div>
         ) : (

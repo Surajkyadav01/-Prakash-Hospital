@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import { DEPARTMENTS } from '../data/hospitalData';
 import { Department } from '../types';
+import { ScrollReveal } from './ScrollReveal';
 
 interface DepartmentGridProps {
   onSelectDepartmentForDoctors: (deptId: string) => void;
@@ -82,18 +83,20 @@ export const DepartmentGrid: React.FC<DepartmentGridProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 space-y-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50 border border-sky-100 text-sky-700 text-xs font-bold tracking-wide uppercase mb-3">
-            <Sparkles className="w-3.5 h-3.5 text-sky-600" />
-            <span>Centres of Clinical Excellence</span>
+        <ScrollReveal animation="fade-up" durationMs={500}>
+          <div className="text-center max-w-3xl mx-auto">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50 border border-sky-100 text-sky-700 text-xs font-bold tracking-wide uppercase mb-3">
+              <Sparkles className="w-3.5 h-3.5 text-sky-600" />
+              <span>Centres of Clinical Excellence</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
+              Key Departments & Super Speciality Care
+            </h2>
+            <p className="mt-3 text-slate-600 text-sm sm:text-base leading-relaxed">
+              Multi-disciplinary medical teams with state-of-the-art diagnostic imaging, robotic technology, and dedicated intensive care units.
+            </p>
           </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
-            Key Departments & Super Speciality Care
-          </h2>
-          <p className="mt-3 text-slate-600 text-sm sm:text-base leading-relaxed">
-            Multi-disciplinary medical teams with state-of-the-art diagnostic imaging, robotic technology, and dedicated intensive care units.
-          </p>
-        </div>
+        </ScrollReveal>
 
         {/* Inline Expanded Department Detail (No small modal!) */}
         {selectedDept && (
@@ -173,70 +176,77 @@ export const DepartmentGrid: React.FC<DepartmentGridProps> = ({
 
         {/* Departments Grid - Mobile Tap Friendly */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
-          {DEPARTMENTS.map((dept) => {
+          {DEPARTMENTS.map((dept, idx) => {
             const isSelected = selectedDeptId === dept.id;
             return (
-              <div
+              <ScrollReveal
                 key={dept.id}
-                id={`dept-card-${dept.id}`}
-                className={`group bg-slate-50 hover:bg-white rounded-2xl p-5 border transition-all duration-200 flex flex-col justify-between ${
-                  isSelected ? 'border-sky-500 shadow-md ring-2 ring-sky-500/20 bg-white' : 'border-slate-200/90 hover:border-sky-300 hover:shadow-lg'
-                }`}
+                animation="fade-up"
+                delayMs={(idx % 4) * 60}
+                durationMs={500}
+                className="h-full"
               >
-                <div>
-                  {/* Header with Icon and Capacity */}
-                  <div className="flex items-start justify-between mb-4">
-                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center border shadow-xs ${getIconBg(dept.iconName)} group-hover:scale-105 transition-transform`}>
-                      {getDepartmentIcon(dept.iconName)}
+                <div
+                  id={`dept-card-${dept.id}`}
+                  className={`h-full group bg-slate-50 hover:bg-white rounded-2xl p-5 border transition-all duration-200 flex flex-col justify-between ${
+                    isSelected ? 'border-sky-500 shadow-md ring-2 ring-sky-500/20 bg-white' : 'border-slate-200/90 hover:border-sky-300 hover:shadow-lg'
+                  }`}
+                >
+                  <div>
+                    {/* Header with Icon and Capacity */}
+                    <div className="flex items-start justify-between mb-4">
+                      <div className={`w-12 h-12 rounded-xl flex items-center justify-center border shadow-xs ${getIconBg(dept.iconName)} group-hover:scale-105 transition-transform`}>
+                        {getDepartmentIcon(dept.iconName)}
+                      </div>
+                      <span className="text-[11px] font-semibold text-slate-500 bg-white border border-slate-200 px-2 py-0.5 rounded-full flex items-center gap-1 shadow-2xs">
+                        <Bed className="w-3 h-3 text-sky-600" />
+                        {dept.bedCapacity}
+                      </span>
                     </div>
-                    <span className="text-[11px] font-semibold text-slate-500 bg-white border border-slate-200 px-2 py-0.5 rounded-full flex items-center gap-1 shadow-2xs">
-                      <Bed className="w-3 h-3 text-sky-600" />
-                      {dept.bedCapacity}
-                    </span>
+
+                    {/* Department Name */}
+                    <h3 className="font-bold text-slate-900 text-lg group-hover:text-sky-600 transition-colors">
+                      {dept.name}
+                    </h3>
+
+                    {/* Description */}
+                    <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed line-clamp-2">
+                      {dept.shortDesc}
+                    </p>
+
+                    {/* Highlights Bullet List */}
+                    <ul className="mt-3 space-y-1 text-xs text-slate-500">
+                      {dept.features.slice(0, 2).map((feat, fIdx) => (
+                        <li key={fIdx} className="flex items-center gap-1.5 truncate">
+                          <span className="w-1.5 h-1.5 rounded-full bg-sky-500 shrink-0" />
+                          <span className="truncate">{feat}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
 
-                  {/* Department Name */}
-                  <h3 className="font-bold text-slate-900 text-lg group-hover:text-sky-600 transition-colors">
-                    {dept.name}
-                  </h3>
+                  {/* Footer Buttons */}
+                  <div className="mt-5 pt-4 border-t border-slate-200/60 flex items-center justify-between gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setSelectedDeptId(isSelected ? null : dept.id)}
+                      className="text-xs font-bold text-sky-600 hover:text-sky-700 flex items-center gap-1 group-hover:underline cursor-pointer"
+                    >
+                      <span>{isSelected ? 'Hide Details' : 'View Details'}</span>
+                      <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                    </button>
 
-                  {/* Description */}
-                  <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed line-clamp-2">
-                    {dept.shortDesc}
-                  </p>
-
-                  {/* Highlights Bullet List */}
-                  <ul className="mt-3 space-y-1 text-xs text-slate-500">
-                    {dept.features.slice(0, 2).map((feat, idx) => (
-                      <li key={idx} className="flex items-center gap-1.5 truncate">
-                        <span className="w-1.5 h-1.5 rounded-full bg-sky-500 shrink-0" />
-                        <span className="truncate">{feat}</span>
-                      </li>
-                    ))}
-                  </ul>
+                    <button
+                      type="button"
+                      onClick={() => onOpenBookingForDept(dept.id)}
+                      className="px-2.5 py-1.5 rounded-lg bg-sky-50 hover:bg-sky-600 text-sky-700 hover:text-white text-xs font-bold transition-all shadow-2xs cursor-pointer"
+                      title={`Book appointment with ${dept.name} specialist`}
+                    >
+                      Book OPD
+                    </button>
+                  </div>
                 </div>
-
-                {/* Footer Buttons */}
-                <div className="mt-5 pt-4 border-t border-slate-200/60 flex items-center justify-between gap-2">
-                  <button
-                    type="button"
-                    onClick={() => setSelectedDeptId(isSelected ? null : dept.id)}
-                    className="text-xs font-bold text-sky-600 hover:text-sky-700 flex items-center gap-1 group-hover:underline cursor-pointer"
-                  >
-                    <span>{isSelected ? 'Hide Details' : 'View Details'}</span>
-                    <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => onOpenBookingForDept(dept.id)}
-                    className="px-2.5 py-1.5 rounded-lg bg-sky-50 hover:bg-sky-600 text-sky-700 hover:text-white text-xs font-bold transition-all shadow-2xs cursor-pointer"
-                    title={`Book appointment with ${dept.name} specialist`}
-                  >
-                    Book OPD
-                  </button>
-                </div>
-              </div>
+              </ScrollReveal>
             );
           })}
         </div>
