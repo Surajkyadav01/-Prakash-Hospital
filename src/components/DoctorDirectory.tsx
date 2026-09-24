@@ -279,13 +279,13 @@ export const DoctorDirectory: React.FC<DoctorDirectoryProps> = ({
 
                       {/* Doctor Distinction / Honor Badge if on board */}
                       {doc.badge && (
-                        <div className="mt-1.5 inline-flex items-center gap-1 text-[11px] font-bold text-amber-900 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200/80">
+                        <div className="mt-1.5 inline-flex items-center gap-1 text-[11px] font-bold text-amber-900 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200/80 whitespace-nowrap">
                           {doc.badge.toLowerCase().includes('gold') ? (
                             <Sparkles className="w-3 h-3 text-amber-600 shrink-0" />
                           ) : (
                             <Award className="w-3 h-3 text-amber-600 shrink-0" />
                           )}
-                          <span className="truncate">{doc.badge}</span>
+                          <span className="whitespace-nowrap">{doc.badge}</span>
                         </div>
                       )}
 

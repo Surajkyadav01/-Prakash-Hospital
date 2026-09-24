@@ -254,9 +254,9 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({
                 className={`bg-white rounded-3xl p-6 border ${leader.isManager ? 'border-sky-300 ring-2 ring-sky-100 bg-linear-to-b from-sky-50/40 via-white to-white' : 'border-slate-200'} shadow-xs flex flex-col justify-between`}
               >
                 <div className="space-y-4">
-                  {/* Photo or Initials Avatar */}
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                    <div className="relative w-28 h-36 sm:w-32 sm:h-40 rounded-2xl overflow-hidden border-2 border-sky-200 shadow-md bg-slate-900 shrink-0">
+                  {/* Photo or Initials Avatar & Badge Header */}
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="relative w-24 h-32 sm:w-28 sm:h-36 rounded-2xl overflow-hidden border-2 border-sky-200 shadow-md bg-slate-900 shrink-0">
                       {leader.photoUrl && (
                         <img
                           src={getAssetUrl(leader.photoUrl)}
@@ -288,9 +288,9 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({
                       </div>
                     </div>
 
-                    {/* Role Tag */}
-                    <div className="self-start">
-                      <span className={`text-[11px] font-extrabold px-3 py-1.5 rounded-full inline-block ${leader.isManager ? 'bg-amber-100 text-amber-900 border border-amber-200 shadow-2xs' : 'bg-sky-100 text-sky-800 border border-sky-200 shadow-2xs'}`}>
+                    {/* Role Tag (aligned to top with photo) */}
+                    <div className="self-start shrink-0 pt-0.5">
+                      <span className={`text-[11px] sm:text-xs font-extrabold px-3 py-1.5 rounded-full inline-flex items-center whitespace-nowrap shadow-2xs ${leader.isManager ? 'bg-amber-100 text-amber-900 border border-amber-200' : 'bg-sky-100 text-sky-800 border border-sky-200'}`}>
                         {leader.badge}
                       </span>
                     </div>
