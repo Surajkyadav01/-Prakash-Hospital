@@ -320,6 +320,15 @@ export const Footer: React.FC<FooterProps> = ({
                 <span>Trauma Desk: {HOSPITAL_INFO.emergencyNumber}</span>
               </a>
 
+              <a
+                href={`tel:${HOSPITAL_INFO.deskPhoneRaw}`}
+                className="flex items-center gap-2 p-2.5 rounded-xl bg-sky-950/50 border border-sky-800/70 text-sky-300 font-bold hover:bg-sky-900/80 transition-colors"
+                title="Click to call Hospital Desk: 8303272422"
+              >
+                <Phone className="w-4 h-4 text-sky-400 shrink-0" />
+                <span>Desk No: {HOSPITAL_INFO.deskDisplay}</span>
+              </a>
+
               <button
                 type="button"
                 onClick={onOpenAmbulance}

@@ -417,18 +417,19 @@ export const BookingPage: React.FC<BookingPageProps> = ({
                   {/* Doctor Summary Card */}
                   {currentDoctor && (
                     <div className="p-4 bg-sky-50/60 border border-sky-100 rounded-2xl flex items-center gap-3.5">
-                      <div className="relative w-14 h-16 rounded-xl overflow-hidden border-2 border-white shadow-2xs shrink-0 bg-slate-900">
+                      <div className="relative w-14 h-14 rounded-xl aspect-square overflow-hidden border-2 border-white shadow-2xs shrink-0 bg-slate-900">
                         {currentDoctor.photoUrl && (
                           <img
                             src={getAssetUrl(currentDoctor.photoUrl)}
                             alt={currentDoctor.name}
-                            className="w-full h-full object-cover object-[center_20%] relative z-10"
+                            loading="lazy"
+                            className="w-full h-full aspect-square object-cover object-top rounded-xl border border-slate-200/60 relative z-10"
                             onError={(e) => {
                               const img = e.currentTarget;
-                              const triedPng = img.getAttribute('data-tried-png');
-                              if (!triedPng) {
-                                img.setAttribute('data-tried-png', 'true');
-                                img.src = getAssetUrl('/assets/doctors/dr-op-yadav.png');
+                              const triedLocal = img.getAttribute('data-tried-local');
+                              if (!triedLocal && currentDoctor.id) {
+                                img.setAttribute('data-tried-local', 'true');
+                                img.src = getAssetUrl(`/assets/doctors/${currentDoctor.id}.jpg`);
                               } else {
                                 img.style.display = 'none';
                               }

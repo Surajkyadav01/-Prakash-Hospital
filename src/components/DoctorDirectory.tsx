@@ -224,18 +224,19 @@ export const DoctorDirectory: React.FC<DoctorDirectoryProps> = ({
                   <div className="flex gap-4 items-start">
                     
                     {/* Doctor Avatar / Photo */}
-                    <div className="relative shrink-0 w-20 h-24 sm:w-24 sm:h-28 rounded-2xl overflow-hidden border-2 border-sky-200 shadow-xs bg-slate-900">
+                    <div className="relative shrink-0 w-20 h-20 sm:w-24 sm:h-24 rounded-xl aspect-square overflow-hidden border-2 border-sky-200 shadow-xs bg-slate-900">
                       {doc.photoUrl && (
                         <img
                           src={getAssetUrl(doc.photoUrl)}
                           alt={doc.name}
-                          className="w-full h-full object-cover object-[center_20%] relative z-10"
+                          loading="lazy"
+                          className="w-full h-full aspect-square object-cover object-top rounded-xl border border-slate-200/60 relative z-10"
                           onError={(e) => {
                             const img = e.currentTarget;
-                            const triedPng = img.getAttribute('data-tried-png');
-                            if (!triedPng) {
-                              img.setAttribute('data-tried-png', 'true');
-                              img.src = getAssetUrl('/assets/doctors/dr-op-yadav.png');
+                            const triedLocal = img.getAttribute('data-tried-local');
+                            if (!triedLocal && doc.id) {
+                              img.setAttribute('data-tried-local', 'true');
+                              img.src = getAssetUrl(`/assets/doctors/${doc.id}.jpg`);
                             } else {
                               img.style.display = 'none';
                             }
@@ -254,14 +255,6 @@ export const DoctorDirectory: React.FC<DoctorDirectoryProps> = ({
                         </span>
                       </div>
                       
-                      {/* Verified Doctor Badge */}
-                      <div 
-                        className="absolute -bottom-0.5 -right-0.5 z-20 bg-white text-emerald-600 border border-emerald-200 shadow-2xs px-1.5 py-0.5 rounded-tl-md rounded-br-xl flex items-center gap-1 text-[10px] font-bold"
-                        title="Verified Medical Staff"
-                      >
-                        <ShieldCheck className="w-3 h-3 text-emerald-600" />
-                        <span>MD</span>
-                      </div>
                     </div>
 
                     {/* Name, Hindi Name, Qual & Specialty */}

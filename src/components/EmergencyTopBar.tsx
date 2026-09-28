@@ -1,5 +1,5 @@
 import React from 'react';
-import { PhoneCall, Ambulance, CalendarCheck, ShieldCheck, Clock, Mail } from 'lucide-react';
+import { PhoneCall, Ambulance, CalendarCheck, ShieldCheck, Clock } from 'lucide-react';
 import { HOSPITAL_INFO } from '../data/hospitalData';
 
 interface EmergencyTopBarProps {
@@ -16,7 +16,7 @@ export const EmergencyTopBar: React.FC<EmergencyTopBarProps> = ({
       <div className="max-w-7xl mx-auto px-3 sm:px-6 py-2 flex items-center justify-between gap-2 flex-wrap sm:flex-nowrap">
         
         {/* Left: 24x7 Emergency Contact & Ambulance Badge */}
-        <div className="flex items-center gap-2 sm:gap-4 flex-wrap">
+        <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
           {/* Emergency Alert Tag */}
           <button
             type="button"
@@ -28,7 +28,7 @@ export const EmergencyTopBar: React.FC<EmergencyTopBarProps> = ({
             <span>24x7 Emergency</span>
           </button>
 
-          {/* Click to Call */}
+          {/* Trauma Desk Click to Call */}
           <a
             href={`tel:${HOSPITAL_INFO.emergencyPhoneRaw}`}
             className="flex items-center gap-1.5 font-bold text-white hover:text-red-300 transition-colors group"
@@ -41,14 +41,17 @@ export const EmergencyTopBar: React.FC<EmergencyTopBarProps> = ({
             <span className="text-red-400 font-extrabold tracking-wider">{HOSPITAL_INFO.emergencyNumber}</span>
           </a>
 
-          {/* Official Email */}
+          {/* Hospital Desk No */}
           <a
-            href={`mailto:${HOSPITAL_INFO.email}`}
-            className="hidden sm:flex items-center gap-1.5 text-slate-300 hover:text-sky-300 pl-3 border-l border-slate-700 transition-colors"
-            title="Direct Hospital Email: kamlesh8383826205@gmail.com"
+            href={`tel:${HOSPITAL_INFO.deskPhoneRaw}`}
+            className="flex items-center gap-1.5 font-bold text-white hover:text-sky-300 pl-2 sm:pl-3 border-l border-slate-700 transition-colors group"
+            title="Click to call Hospital Desk: 8303272422"
           >
-            <Mail className="w-3.5 h-3.5 text-sky-400" />
-            <span className="text-xs font-medium">{HOSPITAL_INFO.email}</span>
+            <span className="p-1 rounded-full bg-sky-500/20 text-sky-400 group-hover:bg-sky-500/30">
+              <PhoneCall className="w-3.5 h-3.5" />
+            </span>
+            <span className="text-slate-300">Desk No.</span>
+            <span className="text-sky-400 font-extrabold tracking-wider">{HOSPITAL_INFO.deskDisplay}</span>
           </a>
 
           {/* OPD Helpline Desktop */}

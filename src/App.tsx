@@ -34,6 +34,13 @@ export default function App() {
       getAssetUrl('/assets/prakash-hospital-real.jpg'),
       getAssetUrl('/assets/doctors/dr-op-yadav.jpg'),
       getAssetUrl('/assets/team/kamlesh-yadav-manager.jpg'),
+      'https://raw.githubusercontent.com/Surajkyadav01/-Prakash-Hospital/main/public/doctors/dr-vk-yadav.jpg',
+      'https://raw.githubusercontent.com/Surajkyadav01/-Prakash-Hospital/main/public/doctors/dr-ashutosh-yadav.jpg',
+      'https://raw.githubusercontent.com/Surajkyadav01/-Prakash-Hospital/main/public/doctors/dr-manas-gupta.jpg',
+      'https://raw.githubusercontent.com/Surajkyadav01/-Prakash-Hospital/main/public/doctors/dr-susheela-yadav.jpg',
+      'https://raw.githubusercontent.com/Surajkyadav01/-Prakash-Hospital/main/public/doctors/dr-pooja-jaiswal.jpg',
+      'https://raw.githubusercontent.com/Surajkyadav01/-Prakash-Hospital/main/public/doctors/dr-mamta-yadav.jpg',
+      'https://raw.githubusercontent.com/Surajkyadav01/-Prakash-Hospital/main/public/doctors/dr-ganesh-yadav.jpg',
       'https://www.image2url.com/r2/default/images/1790235449576-906af834-b306-4f3d-bea1-394c4f26dc1d.jpeg'
     ];
 
@@ -52,8 +59,8 @@ export default function App() {
   }, []);
 
   // Parameters passed to booking view
-  const [bookingDeptId, setBookingDeptId] = useState<string>('cardiology');
-  const [bookingDoctorId, setBookingDoctorId] = useState<string>('dr-rajesh-sharma');
+  const [bookingDeptId, setBookingDeptId] = useState<string>('general-surgery');
+  const [bookingDoctorId, setBookingDoctorId] = useState<string>('dr-op-yadav');
   const [bookingDate, setBookingDate] = useState<string>('');
 
   // Doctor directory filter state

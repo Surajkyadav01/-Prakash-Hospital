@@ -263,6 +263,20 @@ export const Navbar: React.FC<NavbarProps> = ({
             </span>
           </a>
 
+          {/* Desk No Quick Banner */}
+          <a
+            href={`tel:${HOSPITAL_INFO.deskPhoneRaw}`}
+            className="shrink-0 bg-slate-900 hover:bg-slate-800 border-b border-slate-800 px-4 py-2 flex items-center justify-between text-xs transition-colors"
+          >
+            <div className="flex items-center gap-2 text-slate-300 font-medium">
+              <Phone className="w-3.5 h-3.5 text-sky-400" />
+              <span>Desk No.</span>
+            </div>
+            <span className="font-extrabold text-sky-400">
+              {HOSPITAL_INFO.deskDisplay}
+            </span>
+          </a>
+
           {/* 3. Main Scrollable Navigation Body */}
           <div className="flex-1 overflow-y-auto overscroll-contain px-4 py-4 space-y-5">
             
