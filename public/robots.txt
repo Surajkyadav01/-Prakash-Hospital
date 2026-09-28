@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemap definition for search engines
+Sitemap: https://www.prakashospital.com/sitemap.xml
