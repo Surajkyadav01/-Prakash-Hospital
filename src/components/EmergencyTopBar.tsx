@@ -60,8 +60,8 @@ export const EmergencyTopBar: React.FC<EmergencyTopBarProps> = ({
           </div>
         </div>
 
-        {/* Right: Accreditations & Quick Book CTA (Visible on tablet & desktop) */}
-        <div className="hidden sm:flex items-center gap-2 sm:gap-3 ml-auto shrink-0">
+        {/* Right: Accreditations & Quick Book CTA (Visible on both mobile & desktop) */}
+        <div className="flex items-center gap-1.5 sm:gap-3 ml-auto shrink-0">
           <div className="hidden md:flex items-center gap-1 text-[11px] text-emerald-400 bg-emerald-950/60 border border-emerald-800/80 px-2 py-0.5 rounded">
             <ShieldCheck className="w-3.5 h-3.5" />
             <span className="font-semibold">NABH & NABL Accredited</span>
@@ -71,9 +71,10 @@ export const EmergencyTopBar: React.FC<EmergencyTopBarProps> = ({
             type="button"
             onClick={onOpenBooking}
             id="emergency-book-appointment-btn"
-            className="flex items-center gap-1.5 bg-sky-600 hover:bg-sky-500 text-white px-3 py-1 rounded-md font-semibold text-xs tracking-wide shadow-sm transition-all active:scale-95 cursor-pointer whitespace-nowrap"
+            className="flex items-center gap-1 sm:gap-1.5 bg-sky-600 hover:bg-sky-500 text-white px-2 sm:px-3 py-0.5 sm:py-1 rounded-md font-semibold text-[10px] sm:text-xs tracking-tight sm:tracking-wide shadow-xs sm:shadow-sm transition-all active:scale-95 cursor-pointer whitespace-nowrap"
+            title="Book OPD Consultation Appointment"
           >
-            <CalendarCheck className="w-3.5 h-3.5" />
+            <CalendarCheck className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
             <span>Book Appointment</span>
           </button>
         </div>
