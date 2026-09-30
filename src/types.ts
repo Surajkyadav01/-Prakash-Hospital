@@ -46,6 +46,7 @@ export interface Doctor {
   education?: string[];
   languages?: string[];
   aliases?: string[];
+  phone?: string;
 }
 
 export interface GalleryItem {

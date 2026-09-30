@@ -63,6 +63,14 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({
       bio: 'Cardiologist trained at King George\'s Medical University & Lari Cardiology, providing specialized cardiac clinics and cardiovascular consultations.',
       initials: 'VK',
       badge: 'Visiting Specialist'
+    },
+    {
+      name: 'Dr. Arvind Yadav',
+      role: 'Consultant Orthopedic Surgeon (हड्डी एवं जोड़ रोग)',
+      qualifications: 'MBBS, MS Ortho (PGI Saifai) • Ex JR AIIMS Delhi',
+      bio: 'Assistant Professor at ASMC Amethi & Ex Junior Resident AIIMS Delhi, providing expert bone, joint, and orthopedic consultations on Tuesdays & Wednesdays (11:00 AM - 03:00 PM).',
+      initials: 'AY',
+      badge: 'Asst. Professor ASMC Amethi'
     }
   ];
 
