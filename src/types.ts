@@ -59,6 +59,24 @@ export interface GalleryItem {
   caption: string;
 }
 
+export interface CatalogueItem {
+  id: string;
+  doctorId?: string;
+  doctorName: string;
+  hindiName: string;
+  title: string;
+  specialty: string;
+  qualifications: string;
+  affiliation?: string;
+  timing: string;
+  imageUrl: string;
+  githubUrl?: string;
+  localPhoto?: string;
+  theme?: string;
+  badge?: string;
+  departmentId: string;
+}
+
 export interface TPAPartner {
   id: string;
   name: string;

@@ -19,6 +19,7 @@ import { AmbulanceDispatchPage } from './components/AmbulanceDispatchPage';
 import { Footer } from './components/Footer';
 import { AmbulanceModal } from './components/AmbulanceModal';
 import { DirectionsModal } from './components/DirectionsModal';
+import { HospitalCatalogueSection } from './components/HospitalCatalogueSection';
 import { LazySection } from './components/LazySection';
 import { Doctor, PageView } from './types';
 import { getAssetUrl } from './utils/assetPath';
@@ -41,7 +42,14 @@ export default function App() {
       'https://raw.githubusercontent.com/Surajkyadav01/-Prakash-Hospital/main/public/doctors/dr-pooja-jaiswal.jpg',
       'https://raw.githubusercontent.com/Surajkyadav01/-Prakash-Hospital/main/public/doctors/dr-mamta-yadav.jpg',
       'https://raw.githubusercontent.com/Surajkyadav01/-Prakash-Hospital/main/public/doctors/dr-ganesh-yadav.jpg',
-      'https://www.image2url.com/r2/default/images/1790235449576-906af834-b306-4f3d-bea1-394c4f26dc1d.jpeg'
+      'https://www.image2url.com/r2/default/images/1790235449576-906af834-b306-4f3d-bea1-394c4f26dc1d.jpeg',
+      'https://raw.githubusercontent.com/Surajkyadav01/-Prakash-Hospital/main/public/catalogue/cat-arvind-yadav.png',
+      'https://raw.githubusercontent.com/Surajkyadav01/-Prakash-Hospital/main/public/catalogue/cat-vk-yadav.png',
+      'https://raw.githubusercontent.com/Surajkyadav01/-Prakash-Hospital/main/public/catalogue/cat-ashutosh-yadav.png',
+      'https://raw.githubusercontent.com/Surajkyadav01/-Prakash-Hospital/main/public/catalogue/cat-ganesh-yadav.png',
+      'https://raw.githubusercontent.com/Surajkyadav01/-Prakash-Hospital/main/public/catalogue/cat-mamta-yadav.png',
+      'https://raw.githubusercontent.com/Surajkyadav01/-Prakash-Hospital/main/public/catalogue/cat-manas-gupta.png',
+      'https://raw.githubusercontent.com/Surajkyadav01/-Prakash-Hospital/main/public/catalogue/cat-op-yadav.png'
     ];
 
     const preloadImages = () => {
@@ -188,6 +196,14 @@ export default function App() {
               />
             </LazySection>
 
+            {/* Hospital Catalogue & Specialities Carousel Slider */}
+            <LazySection minHeight="500px">
+              <HospitalCatalogueSection
+                onBookDoctor={handleBookDoctor}
+                onOpenBooking={() => handleNavigate('book-appointment')}
+              />
+            </LazySection>
+
             {/* Hospital Photo Gallery Section */}
             <LazySection minHeight="450px">
               <FacilityGallery />
@@ -272,6 +288,12 @@ export default function App() {
               onFilterChange={(deptId) => setDoctorDirectoryFilter(deptId)}
               onBookDoctor={handleBookDoctor}
             />
+            <div className="border-t border-slate-200">
+              <HospitalCatalogueSection
+                onBookDoctor={handleBookDoctor}
+                onOpenBooking={() => handleNavigate('book-appointment')}
+              />
+            </div>
           </div>
         )}
 
